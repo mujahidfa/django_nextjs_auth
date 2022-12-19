@@ -1,6 +1,6 @@
 # Django + NextAuth.js a.k.a. Auth.js
 
-Full TypeScript Next.js authentication using NextAuth.js in the frontend and Django Rest API as backend using JWT via username and password as credentials.
+Full TypeScript Next.js authentication using NextAuth.js in the frontend and Django Rest Framework as backend using JWT via username and password as credentials.
 
 References:
 
