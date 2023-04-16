@@ -2,9 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 
 export default function Home() {
-  const { data: session } = useSession();
-  console.log("&&&&&&&&&&&&&&&&&&&&&&&&");
-  console.log(session);
+  const { data: session, status } = useSession();
 
   return (
     <>
@@ -18,33 +16,39 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {session ? (
-          <>
-            <h1>Hello, you've logged in!</h1>
-            <a
-              href="/api/auth/signout"
-              onClick={(e) => {
-                e.preventDefault();
-                signOut();
-              }}
-            >
-              Logout
-            </a>
-          </>
+        {status === "loading" ? (
+          ""
         ) : (
           <>
-            <h1>Access Denied</h1>
-            <p>
-              <a
-                href="/api/auth/signin"
-                onClick={(e) => {
-                  e.preventDefault();
-                  signIn();
-                }}
-              >
-                You must be signed in to view this page
-              </a>
-            </p>
+            {session ? (
+              <>
+                <h1>Hello, you've logged in!</h1>
+                <a
+                  href="/api/auth/signout"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signOut();
+                  }}
+                >
+                  Logout
+                </a>
+              </>
+            ) : (
+              <>
+                <h1>Access Denied</h1>
+                <p>
+                  <a
+                    href="/api/auth/signin"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      signIn();
+                    }}
+                  >
+                    You must be signed in to view this page
+                  </a>
+                </p>
+              </>
+            )}
           </>
         )}
       </main>
